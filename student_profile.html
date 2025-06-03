@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - Sinai University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #1a237e;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        
+        .logo-text .subtitle {
+            font-size: 12px;
+            margin: 0;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid white;
+        }
+        
+        .user-name {
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-left: 15px;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a237e;
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            color: #1a237e;
+            margin-bottom: 20px;
+        }
+        
+        .info, .grades {
+            margin-top: 20px;
+        }
+        
+        .info p {
+            line-height: 1.8;
+            font-size: 16px;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info p:last-child {
+            border-bottom: none;
+        }
+        
+        .grades table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .grades th, .grades td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .grades th {
+            background-color: #e3f2fd;
+            font-weight: bold;
+        }
+        
+        .grades tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="su_logo.jpeg" alt="Sinai University Logo">
+                <div class="logo-text">
+                    <h1>SINAI UNIVERSITY</h1>
+                    <p class="subtitle">ARISH - KANTARA</p>
+                </div>
+            </div>
+            <div class="user-info">   <div>
+                    <div class="user-name">Basmala Saeed</div>
+                    <div>Faculty of Physical Therapy</div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="profile-header">
+            <h2>Student Profile</h2>
+        </div>
+
+        <div class="info">
+            <p><strong>Name:</strong> Basmala Saeed Mohamed Ali Mohamed</p>
+            
+            <p><strong>Nationality:</strong> Egyptian</p>
+            <p><strong>National ID:</strong> 30702011901262</p>
+            <p><strong>Gender:</strong> Female</p>
+            <p><strong>Religion:</strong> Muslim</p>
+            <p><strong>Birth Date:</strong> 01-02-2007</p>
+            <p><strong>Faculty:</strong> Faculty of Physical Therapy</p>
+            <p><strong>Campus:</strong> Sinai Kantara</p>
+        </div>
+
+        <div class="grades">
+            <h2>Grades</h2>
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                </tr>
+                <tr><td>Psychology 2</td><td>A+</td></tr>
+                <tr><td>Biochemistry 2</td><td>A+</td></tr>
+                <tr><td>Histology 2</td><td>A-</td></tr>
+                <tr><td>Physiology 2</td><td>A-</td></tr>
+                <tr><td>Biophysics 2</td><td>B+</td></tr>
+                <tr><td>Anatomy 2</td><td>B+</td></tr>
+            </table>
+            <div style="margin-left: 20px; font-weight: bold; margin-top: 20px">
+              <a>Gpa: 3.67</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in when page loads
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                window.location.href = 'index.html';
+            }
+        };
+        
+        function logout() {
+            if(confirm('Are you sure you want to logout?')) {
+                // Clear both storage options
+                localStorage.removeItem('isLoggedIn');
+                sessionStorage.removeItem('isLoggedIn');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

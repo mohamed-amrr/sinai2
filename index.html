@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinai University - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .logo {
+            margin-bottom: 30px;
+        }
+        
+        
+        .logo .subtitle {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+        
+        
+        .logo img {
+            height: 180px;
+            margin-right: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me input {
+            margin-right: 10px;
+        }
+        
+        .login-btn {
+            background-color: #0a4b78;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #303f9f;
+        }
+        
+        .error-message {
+            color: #d32f2f;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="su_logo.jpeg" alt="Sinai University Logo">
+        </div>
+        
+        <div id="errorMessage" class="error-message">
+            Invalid email or password. Please try again.
+        </div>
+        
+        <div class="form-group">
+            <input type="text" id="username" placeholder="Email" required>
+        </div>
+        
+        <div class="form-group">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        
+        <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember Me</label>
+        </div>
+        
+        <button class="login-btn" onclick="validateLogin()">LOGIN</button>
+    </div>
+
+    <script>
+        // Predefined credentials (for demo only - in real app, use server-side authentication)
+        const validUsername = "basmala.2402474@su.edu.eg";
+        const validPassword = "30702011901262";
+        
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('errorMessage');
+            
+            if (username === validUsername && password === validPassword) {
+                // Store login state in localStorage if "Remember Me" is checked
+                if (document.getElementById('remember').checked) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                } else {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                }
+                
+                // Redirect to profile page
+                window.location.href = 'student_profile.html';
+            } else {
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        // Check if user is already logged in when page loads
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                window.location.href = 'student_profile.html';
+            }
+            
+            // Allow pressing Enter to submit form
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    validateLogin();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
